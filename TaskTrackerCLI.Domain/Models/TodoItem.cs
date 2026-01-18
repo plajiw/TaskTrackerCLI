@@ -1,10 +1,10 @@
 ﻿namespace TaskTrackerCLI.Domain.Models;
 
-public class Task
+public class TodoItem
 {
     public int Id { get; set; }
     public string Description { get; set; }
-    public StatusTask Status { get; set; }
+    public TodoItemStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }

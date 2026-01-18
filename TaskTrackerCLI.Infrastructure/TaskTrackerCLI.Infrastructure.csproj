@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TaskTrackerCLI.Domain\TaskTrackerCLI.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

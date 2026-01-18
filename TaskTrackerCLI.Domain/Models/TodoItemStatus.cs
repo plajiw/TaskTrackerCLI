@@ -1,6 +1,6 @@
 namespace TaskTrackerCLI.Domain.Models;
 
-public enum StatusTask
+public enum TodoItemStatus
 {
     ToDo,
     InProgress,
