@@ -4,6 +4,7 @@ namespace TaskTrackerCLI.Domain.Constants
     {
         public const string HELP = "help";
         public const string EXIT = "exit";
+        public const string CLEAR = "clear";
         public const string ADD = "add";
         public const string LIST = "list";
         public const string UPDATE = "update";

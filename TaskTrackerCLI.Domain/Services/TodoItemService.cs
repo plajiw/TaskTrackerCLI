@@ -23,7 +23,7 @@ public class TodoItemService : ITodoItemService
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
-        
+
         _todoItemRepository.Add(todoItem);
     }
 
@@ -36,13 +36,22 @@ public class TodoItemService : ITodoItemService
         return _todoItemRepository.GetTodoItem(id);
     }
 
-    public List<TodoItem> GetAllTodoItems()
+    public void GetAllTodoItems()
     {
-        return _todoItemRepository.GetAllTodoItems();
+        var listItems = _todoItemRepository.GetAllTodoItems();
+
+        if (!listItems.Any())
+        {
+            Console.Write("Empty List");
+            return;
+        }
+
+        for (int i = 0; i < listItems.Count; i++)
+            Console.Write($"{i + 1}. {listItems[i].ToString()}\n");
     }
 
     public void DeleteTodoItem(int id)
     {
-        
+
     }
 }

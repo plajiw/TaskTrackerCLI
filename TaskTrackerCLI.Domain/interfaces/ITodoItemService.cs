@@ -11,7 +11,7 @@ namespace TaskTrackerCLI.Domain.interfaces
         public void AddTodoItem(string payload);
         public void UpdateTodoItem(string payload);
         public TodoItem GetTodoItem(int id);
-        public List<TodoItem> GetAllTodoItems();
+        public void GetAllTodoItems();
         public void DeleteTodoItem(int id);
     }
 }

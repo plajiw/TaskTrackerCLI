@@ -1,4 +1,6 @@
-﻿using TaskTrackerCLI.Domain.Constants;
+﻿using TaskTrackerCLI.Domain.Commands;
+using TaskTrackerCLI.Domain.Commands.Abstractions;
+using TaskTrackerCLI.Domain.Constants;
 using TaskTrackerCLI.Domain.interfaces;
 using TaskTrackerCLI.Domain.Services;
 using TaskTrackerCLI.Infrastructure;
@@ -6,7 +8,17 @@ using TaskTrackerCLI.Infrastructure;
 class Program
 {
     private static readonly ITodoItemRepository _repository = new JsonTodoItemRepository();
-    private static readonly TodoItemService _todoItemService = new TodoItemService(_repository);
+    private static readonly ITodoItemService _service = new TodoItemService(_repository);
+
+    private static readonly Dictionary<string, ICommandHandler> _commands = new()
+    {
+        { Commands.HELP, new HelpCommand() },
+        { Commands.ADD, new AddCommand(_service) },
+        { Commands.LIST, new ListCommand(_service) },
+        {Commands.CLEAR, new ClearCommand() },
+        { Commands.EXIT, new ExitCommand() },
+    };
+
     static void Main(string[] args)
     {
         Run();
@@ -15,19 +27,18 @@ class Program
     private static void Run()
     {
         InitialMessageConsole();
-        bool running = true;
-
-        while (running)
+        while (true)
         {
             Console.Write("\n> ");
             var input = Console.ReadLine()?.Trim();
 
             if (string.IsNullOrEmpty(input))
-                Console.WriteLine("INvalid");
+                continue;
 
             HandleCommand(input);
         }
     }
+
 
     private static void InitialMessageConsole()
     {
@@ -40,7 +51,7 @@ class Program
 
         Console.Write("Insert ");
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.Write("add [your task]");
+        Console.Write("add \"your task\"");
         Console.ResetColor();
         Console.Write(" in the console.\n");
 
@@ -51,43 +62,24 @@ class Program
         Console.Write(" for more information.\n");
     }
 
+
     private static void HandleCommand(string input)
     {
         var segments = input.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
         var verb = segments[0];
-        var payload = segments[1];
+        var fullPayload = segments.Length > 1 ? segments[1] : string.Empty;
 
-
-
-        switch (verb)
+        if (_commands.TryGetValue(verb, out var command))
         {
-            case Commands.ADD:
-                _todoItemService.AddTodoItem(payload);
-                break;
-
-            // case Commands.LIST:
-            //     break;
-            //
-            // case Commands.DELETE:
-            //     break;
-            //
-            // case Commands.MARK_IN_PROGRESS:
-            //     break;
-            //
-            // case Commands.MARK_DONE:
-            //     break;
-            //
-            // case Commands.MARK_CANCELLED:
-            //     break;
-            //
-            // case Commands.HELP:
-            //     break;
-            //
-            // case Commands.EXIT:
-            //     break;
-            //
-            // default:
-            //     break;
+            command.Execute(fullPayload);
+        }
+        else
+        {
+            Console.Write($"\nUnknown command: {verb}. Use ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("help");
+            Console.ResetColor();
+            Console.Write(" for more information.");
         }
     }
 }

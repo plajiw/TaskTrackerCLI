@@ -7,4 +7,5 @@ public class TodoItem
     public TodoItemStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    public override string ToString() => $"Id: {Id}, Description: {Description}, Status: {Status}";
 }

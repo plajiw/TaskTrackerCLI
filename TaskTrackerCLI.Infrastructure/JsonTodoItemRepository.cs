@@ -34,7 +34,7 @@ public class JsonTodoItemRepository : ITodoItemRepository
 
     public List<TodoItem> GetAllTodoItems()
     {
-        throw new NotImplementedException();
+        return _items;
     }
 
     public void Delete(int id)
