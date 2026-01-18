@@ -1,4 +1,4 @@
-namespace TaskTrackerCLI.Domain;
+namespace TaskTrackerCLI.Domain.Models;
 
 public enum StatusTask
 {
