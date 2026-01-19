@@ -15,7 +15,8 @@ class Program
         { Commands.HELP, new HelpCommand() },
         { Commands.ADD, new AddCommand(_service) },
         { Commands.LIST, new ListCommand(_service) },
-        {Commands.CLEAR, new ClearCommand() },
+        { Commands.UPDATE, new UpdateCommand(_service)},
+        { Commands.CLEAR, new ClearCommand() },
         { Commands.EXIT, new ExitCommand() },
     };
 

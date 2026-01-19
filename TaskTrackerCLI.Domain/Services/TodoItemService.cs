@@ -29,6 +29,38 @@ public class TodoItemService : ITodoItemService
 
     public void UpdateTodoItem(string payload)
     {
+        if (string.IsNullOrWhiteSpace(payload))
+        {
+            Console.WriteLine("Error: Update requires arguments [id] [description].");
+            return;
+        }
+        
+        var parts = payload.Split(' ', 2,  StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length < 2)
+        {
+            Console.WriteLine("Error: Missing description. Use: update [id] [new description]");
+            return;
+        }
+
+        if (!int.TryParse(parts[0], out int id))
+        {
+            Console.WriteLine($"Error: '{parts[0]}' is not a valid numeric ID.");
+            return;
+        }
+        
+        var item = GetTodoItem(id);
+        if (item == null)
+        {
+            Console.WriteLine($"Error: Task with ID {id} not found.");
+            return;
+        }
+        
+        var updatedDescription = parts[1];
+        item.Description = updatedDescription;
+        item.UpdatedAt = DateTime.UtcNow;
+        
+        _todoItemRepository.Update(item);
+        Console.WriteLine($"Task {id} updated successfully.");
     }
 
     public TodoItem GetTodoItem(int id)

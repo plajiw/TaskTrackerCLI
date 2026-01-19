@@ -22,17 +22,19 @@ public class JsonTodoItemRepository : ITodoItemRepository
         Console.WriteLine($"# Output: Task added successfully (ID: {todoItem.Id})");
     }
 
-    public void Update(int id, string description)
+    public void Update(TodoItem todoItem)
     {
-        throw new NotImplementedException();
+        var index = _items.FindIndex(t => t.Id == todoItem.Id);
+        _items[index] = todoItem;
+        RefreshFile();
     }
 
-    public TodoItem GetTodoItem(int id)
+    public TodoItem? GetTodoItem(int id)
     {
-        throw new NotImplementedException();
+        return _items?.FirstOrDefault(t => t.Id == id);
     }
 
-    public List<TodoItem> GetAllTodoItems()
+    public List<TodoItem>? GetAllTodoItems()
     {
         return _items;
     }
