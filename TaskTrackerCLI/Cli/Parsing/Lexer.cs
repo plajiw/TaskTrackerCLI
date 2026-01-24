@@ -17,13 +17,28 @@ public class Lexer
 
         while (!IsEnd())
         {
-            if (_input[_index] == ' ')
+            if (char.IsWhiteSpace(_input[_index]))
             {
                 _index++;
                 continue;
             }
 
-            if (char.IsDigit(_input[_index]))
+            if (!IsEnd() && char.IsLetter(_input[_index]))
+            {
+                int startPosition = _index;
+                string word = String.Empty;
+                
+                while(!IsEnd() && char.IsLetter(_input[_index]))
+                {
+                    word += _input[_index].ToString();
+                    _index++;
+                }
+                
+                var wordToken = new Token(TokenType.Word,word, startPosition);
+                tokens.Add(wordToken);
+            }
+            
+            else if (!IsEnd() && char.IsDigit(_input[_index]))
             {
                 int startPosition = _index;
                 string number = String.Empty;
@@ -38,13 +53,13 @@ public class Lexer
                 tokens.Add(numberToken);
             }
             
-            else if (_input[_index] == '-' && _input[_index + 1] == '-')
+            else if (!IsEnd() && _input[_index] == '-' && _index + 1 < _input.Length && _input[_index + 1] == '-')
             {
-                _index += 2;
                 int startPosition = _index;
-                string flag = String.Empty;
+                _index += 2;
+                string flag = "--";
 
-                while (!IsEnd() && char.IsLetter(_input[_index]))
+                while (!IsEnd() && (char.IsLetter(_input[_index]) || _input[_index] == '-'))
                 {
                     flag += _input[_index].ToString();
                     _index++;
@@ -52,6 +67,33 @@ public class Lexer
                 
                 var flagToken = new Token(TokenType.Flag, flag, startPosition);
                 tokens.Add(flagToken);
+            }
+            
+            else if (!IsEnd() && (_input[_index] == '"' || _input[_index] == '\''))
+            {
+                char singleOrDoubleQuote = _input[_index];
+                int startPosition = _index;
+                _index++;
+                string literalString = singleOrDoubleQuote.ToString();
+
+                while (!IsEnd() && _input[_index] != singleOrDoubleQuote)
+                {
+                    literalString += _input[_index].ToString();
+                    _index++;
+                }
+                
+                if (IsEnd())
+                    throw new Exception("Unexpected end of string literal");
+                
+                literalString += singleOrDoubleQuote.ToString();
+                _index++;
+
+                var literalStringToken = new Token(TokenType.LiteralString, literalString, startPosition);
+                tokens.Add(literalStringToken);
+            }
+            else
+            {
+                throw new Exception($"Unexpected input");
             }
         }
 
