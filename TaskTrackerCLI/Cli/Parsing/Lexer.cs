@@ -10,11 +10,11 @@ public class Lexer
         _input = input;
         _index = 0;
     }
-    
+
     public List<Token> Tokenizer()
     {
         var tokens = new List<Token>();
-        
+
         while (!IsEnd())
         {
             if (_input[_index] == ' ')
@@ -25,24 +25,22 @@ public class Lexer
 
             else if (char.IsDigit(_input[_index]))
             {
-                int number = _input[_index];
-            }
-            else if (_input[_index] == '-' && _input[_index + 1] == '-')
-            {
-                var flag = string.Empty;
-            }
-            else if (_input[_index] == '"')
-            {
-                var literal = string.Empty;
-            }
-            else
-            {
-                var word = string.Empty;
+                int startPosition = _index;
+                string numbers = String.Empty;
+
+                while (!IsEnd() && char.IsDigit(_input[_index]))
+                {
+                    numbers += _input[_index].ToString();
+                    _index++;
+                }
+
+                var numberToken = new Token(TokenType.Number, numbers, startPosition);
+                tokens.Add(numberToken);
             }
         }
 
         return tokens;
     }
-    
+
     private bool IsEnd() => _index >= _input.Length;
 }
