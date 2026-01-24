@@ -5,8 +5,9 @@ public class ConsoleUi
     public static void ShowWelcome()
     {
         Console.Clear();
+        WriteLine("Welcome to Task Tracker CLI!!!", ConsoleColor.Cyan);
         Write("Insert ", ConsoleColor.Gray);
-        Write("add \"your task\"", ConsoleColor.Blue);
+        Write("add \"your task\"", ConsoleColor.DarkCyan);
         WriteLine(" to save your task.", ConsoleColor.Gray);
     }
     
@@ -16,7 +17,7 @@ public class ConsoleUi
 
     public static string? ReadPrompt()
     {
-        Write("> ", ConsoleColor.Blue);
+        Write("> ", ConsoleColor.DarkCyan);
         return Console.ReadLine()?.Trim();
     }
 
@@ -30,6 +31,7 @@ public class ConsoleUi
 
     private static void WriteLine(string text, ConsoleColor color)
     {
-        Write(text + Environment.NewLine, color);
+        string newLine = Environment.NewLine;
+        Write($"{text}{newLine}", color);
     }
 }
