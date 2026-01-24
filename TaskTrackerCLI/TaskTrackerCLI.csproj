@@ -5,6 +5,10 @@
       <ProjectReference Include="..\TaskTrackerCLI.Infrastructure\TaskTrackerCLI.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Cli\Commands\" />
+    </ItemGroup>
+
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
