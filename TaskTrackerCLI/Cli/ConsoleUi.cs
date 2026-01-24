@@ -1,4 +1,4 @@
-namespace TaskTrackerCLI;
+namespace TaskTrackerCLI.Cli;
 
 public class ConsoleUi
 {
@@ -7,7 +7,6 @@ public class ConsoleUi
         Console.Clear();
         
         WriteLine("Welcome to TaskTracker CLI!",  ConsoleColor.Cyan);
-        
         Write("Insert ", ConsoleColor.Gray);
         Write("add \"your task\"", ConsoleColor.Blue);
         WriteLine(" to save your task.", ConsoleColor.Gray);

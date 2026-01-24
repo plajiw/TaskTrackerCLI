@@ -1,6 +1,4 @@
-using TaskTrackerCLI.Domain.Models;
-
-namespace TaskTrackerCLI;
+namespace TaskTrackerCLI.Cli;
 
 public class CliApplication
 {

@@ -1,6 +1,7 @@
 using System.Text;
+using TaskTrackerCLI.Domain.Models.Token;
 
-namespace TaskTrackerCLI.Domain.Models;
+namespace TaskTrackerCLI.Cli;
 
 public class Lexer
 {
