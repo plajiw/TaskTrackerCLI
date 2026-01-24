@@ -17,6 +17,9 @@ public class CliApplication
             
             var lexer = new Lexer(input);
             var tokens = lexer.Tokenizer();
+
+            foreach (var token in tokens)
+                Console.WriteLine($"Value: {token.Value} - Type: {token.Type} - Position: {token.Position}");
         }
     }
 }

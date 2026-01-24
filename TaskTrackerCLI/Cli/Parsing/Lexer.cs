@@ -23,19 +23,35 @@ public class Lexer
                 continue;
             }
 
-            else if (char.IsDigit(_input[_index]))
+            if (char.IsDigit(_input[_index]))
             {
                 int startPosition = _index;
-                string numbers = String.Empty;
+                string number = String.Empty;
 
                 while (!IsEnd() && char.IsDigit(_input[_index]))
                 {
-                    numbers += _input[_index].ToString();
+                    number += _input[_index].ToString();
                     _index++;
                 }
 
-                var numberToken = new Token(TokenType.Number, numbers, startPosition);
+                var numberToken = new Token(TokenType.Number, number, startPosition);
                 tokens.Add(numberToken);
+            }
+            
+            else if (_input[_index] == '-' && _input[_index + 1] == '-')
+            {
+                _index += 2;
+                int startPosition = _index;
+                string flag = String.Empty;
+
+                while (!IsEnd() && char.IsLetter(_input[_index]))
+                {
+                    flag += _input[_index].ToString();
+                    _index++;
+                }
+                
+                var flagToken = new Token(TokenType.Flag, flag, startPosition);
+                tokens.Add(flagToken);
             }
         }
 
