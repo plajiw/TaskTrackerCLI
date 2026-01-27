@@ -6,24 +6,39 @@ public class Parser
 {
     public Command ParseCommand(List<Token> tokens)
     {
-        if (!tokens.Any())
-            throw new Exception("No tokens found");
+        if (!tokens.Any() || tokens == null)
+            throw new ArgumentException("No tokens found");
 
         if (tokens[0].Type != TokenType.Word)
-            throw new Exception("Expected word");
-        
-        var command = new Command();
-        command.Name = tokens[0].Value;
+            throw new ArgumentException("Expected word");
 
-        tokens.ForEach(t =>
+        var command = new Command()
         {
-            if (t.Type == TokenType.Flag)
-                command.Flags.Add((CommandFlags)Enum.Parse(typeof(CommandFlags), t.Value));
-            
-            if (t.Type == TokenType.LiteralString)
-                command.Arguments.Add(t.Value);
-        });
+            Name = tokens[0].Value,
+        };
 
+        for (int i = 1; i < tokens.Count; i++)
+        {
+            var token = tokens[i];
+
+            switch (token.Type)
+            {
+                case TokenType.Flag:
+                    command.Flags.Add(token.Value);
+                    break;
+                
+                case TokenType.Word:
+                case TokenType.Number:
+                case TokenType.LiteralString:
+                    command.Arguments.Add(token.Value);
+                    break;
+                
+                default:
+                    throw new ArgumentException(
+                        $"Unexpected token '{token.Value}' at position {token.Position}");
+            }
+        }
+        
         return command;
     }
 }
