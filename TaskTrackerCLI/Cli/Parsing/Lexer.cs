@@ -86,6 +86,10 @@ public class Lexer
                     throw new Exception("Unexpected end of string literal");
                 
                 literalString += singleOrDoubleQuote.ToString();
+
+                if (literalString.Length <= 2)
+                    throw new Exception("");
+                
                 _index++;
 
                 var literalStringToken = new Token(TokenType.LiteralString, literalString, startPosition);

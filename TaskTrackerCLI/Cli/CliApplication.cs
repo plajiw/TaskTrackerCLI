@@ -1,29 +1,28 @@
-using TaskTrackerCLI.Cli.Parsing;
+    using TaskTrackerCLI.Cli.Commands;
+    using TaskTrackerCLI.Cli.Parsing;
 
-namespace TaskTrackerCLI.Cli;
+    namespace TaskTrackerCLI.Cli;
 
-public class CliApplication
-{
-    private readonly bool _runner = true; 
-    public void Run()
+    public class CliApplication
     {
-        ConsoleUi.ShowWelcome();
-        
-        while (_runner)
+        private readonly bool _runner = true; 
+        public void Run()
         {
-            var input = ConsoleUi.ReadPrompt();
-            if (string.IsNullOrEmpty(input))
-                continue;
-            
-            var lexer = new Lexer(input);
-            var tokens = lexer.Tokenizer();
             var parser = new Parser();
-            var command = parser.ParseCommand(tokens);
+            var dispatcher = new CommandDispatcher();
             
-            foreach (var token in tokens)
-                Console.WriteLine($"Value: {token.Value} - Type: {token.Type} - Position: {token.Position}");
-
-            Console.WriteLine($"Command: {command.Name} - Arguments: {string.Join(", ", command.Arguments)} - Flags: {string.Join(", ", command.Flags)}");
+            ConsoleUi.ShowWelcome();
+            
+            while (_runner)
+            {
+                var input = ConsoleUi.ReadPrompt();
+                if (string.IsNullOrEmpty(input))
+                    continue;
+                
+                var lexer = new Lexer(input);
+                var tokens = lexer.Tokenizer();
+                var command = parser.ParseCommand(tokens);
+                dispatcher.Dispatch(command);                
+            }
         }
     }
-}

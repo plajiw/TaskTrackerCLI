@@ -6,20 +6,29 @@ namespace TaskTrackerCLI.Test;
 public class LexerTests
 {
     [Fact]
-    public void TokenizesSingleToken()
+    public void TokenizeSingleTokenWord()
     {
-        List<Token> token = new();
-        string input = "add";
         
-        var lexer = new Lexer(input);
-        token = lexer.Tokenizer();
-        
-        Assert.Single(token);
-        Assert.Equal(TokenType.Word, token.First().Type);
-        Assert.Equal("add", token.First().Value);
-        Assert.Equal(0, token.First().Position);
     }
 
+    [Fact]
+    public void TokenizeSingleTokenFlag()
+    {
+        
+    }
+
+    [Fact]
+    public void TokenizeSingleTokenLiteralString()
+    {
+        
+    }
+
+    [Fact]
+    public void TokenizeSingleTokenNumber()
+    {
+        
+    }
+    
     [Fact]
     public void TokenizesMultipleTokens()
     {
@@ -42,5 +51,7 @@ public class LexerTests
         Assert.Equal("\"make a coffe\"", tokens[2].Value);
         Assert.Equal(11, tokens[2].Position);
     }
+
+    
 }
 

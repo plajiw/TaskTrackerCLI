@@ -1,9 +1,10 @@
-﻿using TaskTrackerCLI;
-using TaskTrackerCLI.Cli;
+﻿using TaskTrackerCLI.Cli;
 
-class Program
+namespace TaskTrackerCLI;
+
+public static class Program
 {
-    static void Main(string[] args)
+    private static void Main()
     {
         var app = new CliApplication();
         app.Run();
