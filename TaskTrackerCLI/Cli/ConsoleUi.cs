@@ -19,26 +19,19 @@ public class ConsoleUi
         {
             Write("Unknown command: ", ConsoleColor.Red);
             WriteLine(command, ConsoleColor.DarkCyan);
-            Console.WriteLine();
         }
 
         WriteLine("Available commands:", ConsoleColor.Cyan);
-        Console.WriteLine();
-
         Write("  add ", ConsoleColor.DarkCyan);
         WriteLine("\"task description\"", ConsoleColor.Gray);
-
         Write("      ", ConsoleColor.Gray);
         WriteLine("Adds a new task to the list.", ConsoleColor.DarkGray);
 
         Console.WriteLine();
 
         WriteLine("Examples:", ConsoleColor.Cyan);
-        Console.WriteLine();
-
         Write("  add ", ConsoleColor.DarkCyan);
         WriteLine("\"Buy milk\"", ConsoleColor.Gray);
-
         Write("  add ", ConsoleColor.DarkCyan);
         WriteLine("\"Study algorithms\" --done", ConsoleColor.Gray);
 
