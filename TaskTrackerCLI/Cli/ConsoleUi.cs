@@ -37,7 +37,7 @@ public class ConsoleUi
 
         Console.WriteLine();
 
-        WriteLine("Type \"help\" to see this message again.", ConsoleColor.DarkGray);
+        WriteLine("Type \"help\" to see this message again.\n", ConsoleColor.DarkGray);
     }
 
     public static string? ReadPrompt()

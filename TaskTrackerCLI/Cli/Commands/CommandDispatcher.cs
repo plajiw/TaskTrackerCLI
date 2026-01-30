@@ -4,7 +4,8 @@ public class CommandDispatcher
 {
     private Dictionary<string, ICommandHandler> _commands = new Dictionary<string, ICommandHandler>
     {
-        { "add", new AddCommandHandler() },
+        { CommandNames.ADD_COMMAND, new AddCommandHandler() },
+        { "list", new ListCommandHandler() },
     };
     
     public void Dispatch(Command command)
