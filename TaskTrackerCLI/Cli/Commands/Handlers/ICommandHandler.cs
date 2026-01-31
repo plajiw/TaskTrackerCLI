@@ -1,4 +1,4 @@
-namespace TaskTrackerCLI.Cli.Commands;
+namespace TaskTrackerCLI.Cli.Commands.Handlers;
 
 public interface ICommandHandler
 {

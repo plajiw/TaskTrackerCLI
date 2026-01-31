@@ -6,7 +6,7 @@ public class Parser
 {
     public Command ParseCommand(List<Token> tokens)
     {
-        if (!tokens.Any() || tokens == null)
+        if (tokens == null  || !tokens.Any())
             throw new ArgumentException("No tokens found");
 
         if (tokens[0].Type != TokenType.Word)
@@ -24,13 +24,13 @@ public class Parser
             switch (token.Type)
             {
                 case TokenType.Flag:
-                    command.Flags.Add(token.Value);
+                    command.FlagsTokens.Add(token);
                     break;
                 
                 case TokenType.Word:
                 case TokenType.Number:
                 case TokenType.LiteralString:
-                    command.Arguments.Add(token.Value);
+                    command.ArgumentsTokens.Add(token);
                     break;
                 
                 default:

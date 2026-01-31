@@ -1,11 +1,13 @@
+using TaskTrackerCLI.Cli.Commands.Handlers;
+
 namespace TaskTrackerCLI.Cli.Commands;
 
 public class CommandDispatcher
 {
     private Dictionary<string, ICommandHandler> _commands = new Dictionary<string, ICommandHandler>
     {
-        { CommandNames.ADD_COMMAND, new AddCommandHandler() },
-        { "list", new ListCommandHandler() },
+        { CommandNames.ADD, new AddCommandHandler() },
+        { CommandNames.LIST, new ListCommandHandler() },
     };
     
     public void Dispatch(Command command)
@@ -17,7 +19,7 @@ public class CommandDispatcher
             ConsoleUi.ShowHelp(command.Name);
             return;
         }
-            
+        
         commandHandler.Handle(command);
     }
 }
