@@ -8,6 +8,6 @@ public class CommandBinder
     private readonly List<string> _errors;
     public static void AddCommand(Command command)
     {
-                
+        
     }
 }
