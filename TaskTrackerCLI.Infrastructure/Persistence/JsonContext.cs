@@ -8,38 +8,32 @@ namespace TaskTrackerCLI.Infrastructure.Persistence
         private readonly string _filePath;  
         public JsonContext()
         {
-            var tempFilePath = Path.GetTempFileName();
-            var filePath = Path.Combine(tempFilePath, Constants.JSON_FILE_NAME);
-            
-            if (!File.Exists(filePath))
-            {
-                using (StreamWriter sw = File.AppendText(filePath))
-                {
-                    sw.WriteLine("[]");
-                }
-            }
+            var tempFilePath = Path.GetTempPath();
+            _filePath = Path.Combine(tempFilePath, Constants.JSON_FILE_NAME);
 
-           _filePath = filePath;
+            if (!File.Exists(_filePath))
+                File.WriteAllText(_filePath, "[]");
         }
 
-        public void LoadData()
+        public List<TaskItem> LoadData()
         {
-            var dataDeserializer = new List<TaskItem>();
             var data = File.ReadAllText(_filePath);
 
             try
             {
-                dataDeserializer = JsonSerializer.Deserialize<TaskItem>(data);
+                return JsonSerializer.Deserialize<List<TaskItem>>(data);
             }
             catch
             {
-
+                return new List<TaskItem>();
             }
-
         }
 
         public void SaveData(List<TaskItem> taskItems)
         {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var json = JsonSerializer.Serialize(taskItems, options);
+            File.WriteAllText(_filePath, json);
         }
     }
 }

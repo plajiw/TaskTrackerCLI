@@ -26,7 +26,7 @@ public class Lexer
             if (!IsEnd() && char.IsLetter(_input[_index]))
             {
                 int startPosition = _index;
-                string word = String.Empty;
+                string word = string.Empty;
                 
                 while(!IsEnd() && char.IsLetter(_input[_index]))
                 {
@@ -41,7 +41,7 @@ public class Lexer
             else if (!IsEnd() && char.IsDigit(_input[_index]))
             {
                 int startPosition = _index;
-                string number = String.Empty;
+                string number = string.Empty;
 
                 while (!IsEnd() && char.IsDigit(_input[_index]))
                 {

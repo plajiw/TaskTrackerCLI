@@ -24,7 +24,10 @@ namespace TaskTrackerCLI.Infrastructure.Persistence.Json
 
         public void InsertTaskItem(TaskItem taskItem)
         {
-            throw new NotImplementedException();
+            var tasks = _jsonContext.LoadData();
+            taskItem.Id = tasks.Any() ? tasks.Max(t => t.Id) + 1 : 1;
+            tasks.Add(taskItem);
+            _jsonContext.SaveData(tasks);
         }
 
         public void UpdateTaskItem(TaskItem taskItem)
