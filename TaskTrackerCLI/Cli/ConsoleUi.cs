@@ -10,7 +10,7 @@ public class ConsoleUi
         Write("add \"your task\"", ConsoleColor.DarkCyan);
         WriteLine(" to save your task.", ConsoleColor.Gray);
     }
-    
+
     public static void ShowHelp(string? command = null)
     {
         Console.WriteLine();
@@ -46,7 +46,7 @@ public class ConsoleUi
         return Console.ReadLine()?.Trim();
     }
 
-    private static void Write(string text, ConsoleColor color)
+    public static void Write(string text, ConsoleColor color)
     {
         var previous = Console.ForegroundColor;
         Console.ForegroundColor = color;
@@ -54,7 +54,7 @@ public class ConsoleUi
         Console.ForegroundColor = previous;
     }
 
-    private static void WriteLine(string text, ConsoleColor color)
+    public static void WriteLine(string text, ConsoleColor color)
     {
         string newLine = Environment.NewLine;
         Write($"{text}{newLine}", color);

@@ -13,12 +13,16 @@ public class AddCommandHandler : ICommandHandler
 
     public void Handle(Command command)
     {
-        var description = command.ArgumentsTokens.FirstOrDefault().ToString() ?? "Teste";
+        var description = command.ArgumentsTokens.FirstOrDefault()?.Value.ToString();
+
+        if (description is null)
+            throw new ArgumentException();
 
         var task = new TaskItem
         {
             Description = description,
-            CreatedAt = DateTime.Now
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now,
         };
 
         _repository.InsertTaskItem(task);

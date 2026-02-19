@@ -4,18 +4,18 @@ namespace TaskTrackerCLI.Cli.Parsing;
 
 public class Parser
 {
-    public Command ParseCommand(List<Token> tokens)
+    public ParserResult ParseCommand(List<Token> tokens)
     {
-        if (tokens == null  || !tokens.Any())
-            throw new ArgumentException("No tokens found");
+        var result = new ParserResult()
+        {
+            Command = new Command() { Name = tokens[0].Value }
+        };
+
+        if (tokens == null || !tokens.Any())
+            result.Errors.Add("No tokens found");
 
         if (tokens[0].Type != TokenType.Word)
-            throw new ArgumentException("Expected word");
-
-        var command = new Command()
-        {
-            Name = tokens[0].Value,
-        };
+            result.Errors.Add("Expected word");
 
         for (int i = 1; i < tokens.Count; i++)
         {
@@ -24,21 +24,28 @@ public class Parser
             switch (token.Type)
             {
                 case TokenType.Flag:
-                    command.FlagsTokens.Add(token);
+                    result.Command.FlagsTokens.Add(token);
                     break;
-                
+
                 case TokenType.Word:
                 case TokenType.Number:
                 case TokenType.LiteralString:
-                    command.ArgumentsTokens.Add(token);
+                    result.Command.ArgumentsTokens.Add(token);
                     break;
-                
+
                 default:
-                    throw new ArgumentException(
-                        $"Unexpected token '{token.Value}' at position {token.Position}");
+                    result.Errors.Add($"Unexpected token '{token.Value}' at position {token.Position}");
+                    break;
             }
         }
-        
-        return command;
+
+        return result;
+    }
+
+    public class ParserResult
+    {
+        public Command? Command { get; set; }
+        public List<string> Errors { get; set; } = [];
+        public bool Success => Errors.Count == 0 && Command != null;
     }
 }

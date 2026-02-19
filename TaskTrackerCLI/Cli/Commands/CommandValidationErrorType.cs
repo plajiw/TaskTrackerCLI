@@ -7,7 +7,7 @@
         MissingArgument,
         TooManyArguments,
         InvalidArgumentType,
-        EmptyArgument, 
+        EmptyArgument,
         NullArgument
     }
 }

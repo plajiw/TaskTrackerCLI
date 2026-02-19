@@ -14,7 +14,8 @@ namespace TaskTrackerCLI.Infrastructure.Persistence.Json
 
         public List<TaskItem> GetAllTaskItem()
         {
-            throw new NotImplementedException();
+            var tasks = _jsonContext.LoadData();
+            return tasks;
         }
 
         public TaskItem GetTaskItem(int id)

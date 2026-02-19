@@ -11,9 +11,9 @@ public class Lexer
         _index = 0;
     }
 
-    public List<Token> Tokenizer()
+    public LexerResult Tokenizer()
     {
-        var tokens = new List<Token>();
+        var result = new LexerResult();
 
         while (!IsEnd())
         {
@@ -27,17 +27,17 @@ public class Lexer
             {
                 int startPosition = _index;
                 string word = string.Empty;
-                
-                while(!IsEnd() && char.IsLetter(_input[_index]))
+
+                while (!IsEnd() && char.IsLetter(_input[_index]))
                 {
                     word += _input[_index].ToString();
                     _index++;
                 }
-                
-                var wordToken = new Token(TokenType.Word,word, startPosition);
-                tokens.Add(wordToken);
+
+                var wordToken = new Token(TokenType.Word, word, startPosition);
+                result.Tokens.Add(wordToken);
             }
-            
+
             else if (!IsEnd() && char.IsDigit(_input[_index]))
             {
                 int startPosition = _index;
@@ -50,9 +50,9 @@ public class Lexer
                 }
 
                 var numberToken = new Token(TokenType.Number, number, startPosition);
-                tokens.Add(numberToken);
+                result.Tokens.Add(numberToken);
             }
-            
+
             else if (!IsEnd() && _input[_index] == '-' && _index + 1 < _input.Length && _input[_index + 1] == '-')
             {
                 int startPosition = _index;
@@ -64,11 +64,11 @@ public class Lexer
                     flag += _input[_index].ToString();
                     _index++;
                 }
-                
+
                 var flagToken = new Token(TokenType.Flag, flag, startPosition);
-                tokens.Add(flagToken);
+                result.Tokens.Add(flagToken);
             }
-            
+
             else if (!IsEnd() && (_input[_index] == '"' || _input[_index] == '\''))
             {
                 char singleOrDoubleQuote = _input[_index];
@@ -81,28 +81,39 @@ public class Lexer
                     literalString += _input[_index].ToString();
                     _index++;
                 }
-                
+
                 if (IsEnd())
-                    throw new Exception("Unexpected end of string literal");
-                
+                {
+                    result.Errors.Add($"Error at position {_index}: Unexpected end of string literal.");
+                    break;
+                }
+
                 literalString += singleOrDoubleQuote.ToString();
 
                 if (literalString.Length <= 2)
                     throw new Exception("");
-                
+
                 _index++;
 
                 var literalStringToken = new Token(TokenType.LiteralString, literalString, startPosition);
-                tokens.Add(literalStringToken);
+                result.Tokens.Add(literalStringToken);
             }
             else
             {
-                throw new Exception($"Unexpected input");
+                result.Errors.Add($"Error at position {_index}: Unexpected input.");
+                break;
             }
         }
 
-        return tokens;
+        return result;
     }
 
     private bool IsEnd() => _index >= _input.Length;
+
+    public class LexerResult
+    {
+        public List<Token> Tokens { get; set; } = [];
+        public List<string> Errors { get; set; } = [];
+        public bool Success => Errors.Count == 0;
+    }
 }

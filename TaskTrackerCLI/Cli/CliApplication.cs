@@ -26,9 +26,30 @@ public class CliApplication
                 continue;
 
             var lexer = new Lexer(input);
-            var tokens = lexer.Tokenizer();
-            var command = _parser.ParseCommand(tokens);
-            _dispatcher.Dispatch(command);
+            var lexerResult = lexer.Tokenizer();
+
+            if (!lexerResult.Success)
+            {
+                foreach (var erro in lexerResult.Errors)
+                    ShowErrors(lexerResult.Errors);
+                continue;
+            }
+
+            var parserResult = _parser.ParseCommand(lexerResult.Tokens);
+
+            if (!parserResult.Success)
+            {
+                foreach (var erro in lexerResult.Errors)
+                    ShowErrors(lexerResult.Errors);
+                continue;
+            }
+
+            _dispatcher.Dispatch(parserResult.Command!);
         }
+    }
+    private void ShowErrors(List<string> errors)
+    {
+        foreach (var erro in errors)
+            ConsoleUi.WriteLine($"[Error] {erro}", ConsoleColor.Red);
     }
 }
