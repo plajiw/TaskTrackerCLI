@@ -2,19 +2,26 @@
 
 ## English
 
-TaskTrackerCLI is a command-line interface application built to manage personal tasks.
-This project is an implementation of the [task-tracker](https://roadmap.sh/projects/task-tracker) challenge from [roadmap.sh](https://roadmap.sh),
-focusing on clean architecture and the application of behavioral design patterns.
+TaskTrackerCLI is a robust command-line interface application designed for efficient personal task management. This project is a high-level implementation of the [task-tracker](https://roadmap.sh/projects/task-tracker) challenge from [roadmap.sh](https://roadmap.sh/).
+Unlike simple CLI tools, this project is built with a focus on Clean Architecture and Behavioral Design Patterns, treating user input through a professional processing pipeline.
 
-**Architecture**
-The project employs lexical analysis to process user input, transforming raw character sequences into structured tokens—such as keywords, identifiers, and literals.
-This is integrated with the Command Design Pattern, which decouples the input parsing logic from the actual task execution. By isolating each operation into its own command object, the architecture ensures the system is modular, maintainable, and easily scalable for future feature additions.
+## Architecture & Design
+
+The engine of this application follows a "mini-compiler" flow to ensure stability and scalability:
+
+- Lexical Analysis (Lexer): Processes raw strings into meaningful Tokens (Keywords, Literals, Flags).
+- Parsing (Parser): Validates the token stream and builds a structured Command object.
+- Command Pattern: Decouples the request from the execution. Each command is an isolated handler.
 
 ## Portuguese
 
-TaskTrackerCLI é uma aplicação de interface de comando construida para gerenciar tarefas pessoais.
-O projeto é uma implementação do desafio [task-tracker](https://roadmap.sh/projects/task-tracker) [roadmap.sh](https://roadmap.sh).
+TaskTrackerCLI é uma aplicação de linha de comando robusta, construída para um gerenciamento de tarefas eficiente. Este projeto é uma implementação avançada do desafio [task-tracker](https://roadmap.sh/projects/task-tracker) do [roadmap.sh](https://roadmap.sh/).
+Diferente de ferramentas CLI simples, este projeto foca em Arquitetura Limpa e Padrões de Projeto Comportamentais, tratando a entrada do usuário através de um pipeline de processamento profissional.
 
-**Arquitetura**
-O projeto utiliza um recurso de análise léxica, processando a sequência de caracteres inserida pelo usuário para transformá-la em uma sequência de tokens (unidades significativas como palavras-chave, identificadores e literais).
-Complementando essa estrutura, foi aplicado o Command Design Pattern para organizar a execução das funcionalidades. Essa abordagem separa a lógica de processamento de entrada da execução propriamente dita, resultando em um código modular, de fácil manutenção e altamente extensível para novos comandos.
+## Arquitetura e Design
+
+O motor desta aplicação segue o fluxo de um "mini-compilador" para garantir estabilidade e escalabilidade:
+
+- Análise Léxica (Lexer): Processa strings brutas em Tokens significativos (Palavras-chave, Literais, Flags).
+- Análise Sintática (Parser): Valida a sequência de tokens e constrói um objeto Command estruturado.
+- Command Pattern: Desacopla a requisição da execução. Cada comando é um handler isolado.
