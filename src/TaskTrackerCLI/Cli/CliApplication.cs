@@ -22,7 +22,7 @@ public class CliApplication
         while (_runner)
         {
             var input = ConsoleUi.ReadPrompt();
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrWhiteSpace(input))
                 continue;
 
             var lexer = new Lexer(input);

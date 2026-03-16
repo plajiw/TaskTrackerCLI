@@ -9,7 +9,8 @@ public class CommandDispatcher(ITaskItemRepository repository)
     {
         { CommandNames.ADD, new AddCommandHandler(repository) },
         { CommandNames.LIST, new ListCommandHandler(repository) },
-        { CommandNames.CLEAR, new ClearCommandHandler() }
+        { CommandNames.CLEAR, new ClearCommandHandler() },
+        { CommandNames.HELP, new HelpCommandHandler() }
     };
 
     public void Dispatch(Command command)
@@ -18,7 +19,7 @@ public class CommandDispatcher(ITaskItemRepository repository)
 
         if (commandHandler == null)
         {
-            ConsoleUi.ShowHelp(command.Name);
+            ConsoleUi.ShowHint(command.Name);
             return;
         }
 

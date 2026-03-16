@@ -19,7 +19,7 @@ public class ConsoleUi
         WriteLine(" to save your task.", ConsoleColor.Gray);
     }
 
-    public static void ShowHelp(string? command = null)
+    public static void ShowHint(string? command = null)
     {
         Console.WriteLine();
 
@@ -46,6 +46,92 @@ public class ConsoleUi
         Console.WriteLine();
 
         WriteLine("Type \"help\" to see this message again.\n", ConsoleColor.DarkGray);
+    }
+
+    public static void ShowHelp()
+    {
+        Console.WriteLine();
+        WriteLine("Task Tracker CLI", ConsoleColor.Cyan);
+        Console.WriteLine();
+
+        WriteLine("USAGE", ConsoleColor.Cyan);
+        Write("  ", ConsoleColor.Gray);
+        Write("<command>", ConsoleColor.DarkCyan);
+        WriteLine(" [arguments] [options]", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        WriteLine("COMMANDS", ConsoleColor.Cyan);
+        Console.WriteLine();
+
+        Write("  add ", ConsoleColor.DarkCyan);
+        Write("<\"description\">", ConsoleColor.Gray);
+        WriteLine(" [options]", ConsoleColor.DarkGray);
+        Write("      ", ConsoleColor.Gray);
+        WriteLine("Adds a new task to the list.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+        Write("      Options:", ConsoleColor.Gray);
+        Console.WriteLine();
+        Write("        --done", ConsoleColor.DarkCyan);
+        WriteLine("         Creates the task with status Done.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        Write("  list", ConsoleColor.DarkCyan);
+        Console.WriteLine();
+        Write("      ", ConsoleColor.Gray);
+        WriteLine("Lists all tasks.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        Write("  update ", ConsoleColor.DarkCyan);
+        Write("<id>", ConsoleColor.Gray);
+        Write(" [options]", ConsoleColor.DarkGray);
+        WriteLine("                        (coming soon)", ConsoleColor.DarkGray);
+        Write("      ", ConsoleColor.Gray);
+        WriteLine("Updates the description or status of a task.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+        Write("      Options:", ConsoleColor.Gray);
+        Console.WriteLine();
+        Write("        --todo", ConsoleColor.DarkCyan);
+        WriteLine("          Sets the task status to Todo.", ConsoleColor.DarkGray);
+        Write("        --in-progress", ConsoleColor.DarkCyan);
+        WriteLine("   Sets the task status to In Progress.", ConsoleColor.DarkGray);
+        Write("        --done", ConsoleColor.DarkCyan);
+        WriteLine("          Sets the task status to Done.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        Write("  remove ", ConsoleColor.DarkCyan);
+        Write("<id>", ConsoleColor.Gray);
+        WriteLine("                                 (coming soon)", ConsoleColor.DarkGray);
+        Write("      ", ConsoleColor.Gray);
+        WriteLine("Removes a task by its ID.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        Write("  clear", ConsoleColor.DarkCyan);
+        Console.WriteLine();
+        Write("      ", ConsoleColor.Gray);
+        WriteLine("Clears the terminal.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        Write("  help", ConsoleColor.DarkCyan);
+        Console.WriteLine();
+        Write("      ", ConsoleColor.Gray);
+        WriteLine("Shows this help message.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        Write("  exit", ConsoleColor.DarkCyan);
+        WriteLine("                                        (coming soon)", ConsoleColor.DarkGray);
+        Write("      ", ConsoleColor.Gray);
+        WriteLine("Exits the application.", ConsoleColor.DarkGray);
+        Console.WriteLine();
+
+        WriteLine("STATUS VALUES", ConsoleColor.Cyan);
+        Console.WriteLine();
+        Write("  todo           ", ConsoleColor.DarkCyan);
+        WriteLine("Task not started yet.", ConsoleColor.DarkGray);
+        Write("  in-progress    ", ConsoleColor.DarkCyan);
+        WriteLine("Task currently in progress.", ConsoleColor.DarkGray);
+        Write("  done           ", ConsoleColor.DarkCyan);
+        WriteLine("Task completed.", ConsoleColor.DarkGray);
+        Console.WriteLine();
     }
 
     public static string? ReadPrompt()
