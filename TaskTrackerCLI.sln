@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI", "TaskTrackerCLI\TaskTrackerCLI.csproj", "{46D3C79E-A69C-4C47-862A-1866DE7A7324}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI", "src\TaskTrackerCLI\TaskTrackerCLI.csproj", "{46D3C79E-A69C-4C47-862A-1866DE7A7324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI.Domain", "TaskTrackerCLI.Domain\TaskTrackerCLI.Domain.csproj", "{4776139A-D718-4057-9DD5-CA4CB8891FEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI.Domain", "src\TaskTrackerCLI.Domain\TaskTrackerCLI.Domain.csproj", "{4776139A-D718-4057-9DD5-CA4CB8891FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI.Infrastructure", "TaskTrackerCLI.Infrastructure\TaskTrackerCLI.Infrastructure.csproj", "{EB16EFBE-BC30-4140-AE52-44295FF99C22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI.Infrastructure", "src\TaskTrackerCLI.Infrastructure\TaskTrackerCLI.Infrastructure.csproj", "{EB16EFBE-BC30-4140-AE52-44295FF99C22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI.Test", "TaskTrackerCLI.Test\TaskTrackerCLI.Test.csproj", "{77085ECD-7AAB-4582-9B27-E43B325940AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerCLI.Test", "src\TaskTrackerCLI.Test\TaskTrackerCLI.Test.csproj", "{77085ECD-7AAB-4582-9B27-E43B325940AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

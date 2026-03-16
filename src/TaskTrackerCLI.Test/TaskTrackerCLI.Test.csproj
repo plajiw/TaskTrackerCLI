@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\TaskTrackerCLI\TaskTrackerCLI.csproj" />
+            <ProjectReference Include="..\src\TaskTrackerCLI\TaskTrackerCLI.csproj" />
     </ItemGroup>
 
 </Project>
