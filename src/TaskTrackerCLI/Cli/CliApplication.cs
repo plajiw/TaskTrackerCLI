@@ -31,7 +31,9 @@ public class CliApplication
             if (!lexerResult.Success)
             {
                 foreach (var erro in lexerResult.Errors)
+                {
                     ShowErrors(lexerResult.Errors);
+                }
                 continue;
             }
 
@@ -40,7 +42,9 @@ public class CliApplication
             if (!parserResult.Success)
             {
                 foreach (var erro in lexerResult.Errors)
+                {
                     ShowErrors(lexerResult.Errors);
+                }
                 continue;
             }
 

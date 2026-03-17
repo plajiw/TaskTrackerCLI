@@ -9,8 +9,11 @@ public class CommandDispatcher(ITaskItemRepository repository)
     {
         { CommandNames.ADD, new AddCommandHandler(repository) },
         { CommandNames.LIST, new ListCommandHandler(repository) },
+        { CommandNames.UPDATE, new UpdateCommandHandler() },
+        { CommandNames.REMOVE, new RemoveCommandHandler() },
         { CommandNames.CLEAR, new ClearCommandHandler() },
-        { CommandNames.HELP, new HelpCommandHandler() }
+        { CommandNames.HELP, new HelpCommandHandler() },
+        { CommandNames.EXIT, new ExitCommandHandler() },
     };
 
     public void Dispatch(Command command)

@@ -14,7 +14,8 @@ public class AddCommandHandler : ICommandHandler
     public void Handle(Command command)
     {
         var description = command.ArgumentsTokens.FirstOrDefault()?.Value.ToString();
-
+        var argumentsFlag = command.FlagsTokens;
+        
         if (description is null)
             throw new ArgumentException();
 
@@ -25,7 +26,23 @@ public class AddCommandHandler : ICommandHandler
             UpdatedAt = DateTime.Now,
         };
 
-        _repository.InsertTaskItem(task);
+        if (argumentsFlag.Any())
+        {
+            var flag = argumentsFlag.FirstOrDefault().Value.ToString();
 
+            switch (flag)
+            {
+                case "--done":
+                    task.Status = TaskItemStatus.Done;
+                    break;
+
+                case "--in-progress":
+                    task.Status = TaskItemStatus.InProgress;
+                    break;
+            }
+        }
+
+        _repository.InsertTaskItem(task);
+        ConsoleUi.ShowSucessOperation();
     }
 }

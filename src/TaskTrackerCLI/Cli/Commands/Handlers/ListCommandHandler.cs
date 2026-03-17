@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using TaskTrackerCLI.Domain.Models.TaskItem;
-using TaskTrackerCLI.Domain.Repositories;
+﻿using TaskTrackerCLI.Domain.Repositories;
 
 namespace TaskTrackerCLI.Cli.Commands.Handlers
 {

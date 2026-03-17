@@ -2,7 +2,9 @@ namespace TaskTrackerCLI.Cli.Commands;
 
 public class CommandBinder
 {
-    private readonly HashSet<string> _validFlags = [FlagsNames.DONE];
+    private readonly HashSet<string> _validFlags = [
+        FlagsNames.DONE, FlagsNames.IN_PROGRESS, FlagsNames.TODO
+    ];
     private readonly HashSet<string> _seenFlags;
     private readonly List<CommandValidationError> _errors;
     public CommandBinder(Command command)

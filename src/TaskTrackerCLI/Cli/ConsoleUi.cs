@@ -154,6 +154,10 @@ public class ConsoleUi
         Write($"{text}{newLine}", color);
     }
 
+    public static void ShowSucessOperation()
+    {
+        WriteLine("Add sucess", ConsoleColor.DarkGray);
+    }
     public static void DrawLine()
     {
         const char lineChar = '-';
